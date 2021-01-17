@@ -1,8 +1,3 @@
----
-title: Markdown Syntax Cheat Sheet
----
-
-# For Markdown syntax noobs like Daniel Boey, below is a quick cheat sheet:
 
 <!-- Headings -->
 # Heading 1

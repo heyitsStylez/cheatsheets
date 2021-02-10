@@ -11,3 +11,24 @@ gcloud compute ssl-certificates list                                   # List SS
 gcloud auth list                                                       # List credentialed accounts
 gcloud config set account [ACCOUNT]                                    # Set active account
 ```
+
+## Create Instance
+```bash
+gcloud compute instances create [INSTANCE_NAMES] \
+  --zone=asia-southeast1-a \
+  --subnet=default \
+  --tags [TAGS] \
+  --machine-type=[MACHINE_TYPE]
+  --image-family [IMAGE_FAMILY] \
+  --image-project [IMAGE_PROJECT] \
+  --create-disk size=[SIZE_GB],type=[DISK_TYPE]
+```
+
+gcloud compute instances create preprod-mongo0 preprod-mongo1 preprod-mongo2 \
+  --zone=asia-southeast1-a \
+  --subnet=default \
+  --tags office-malaysia \
+  --machine-type=n1-standard-1 \
+  --image-family debian-9 \
+  --image-project debian-cloud \
+  --create-disk size=50GB,type=pd-ssd

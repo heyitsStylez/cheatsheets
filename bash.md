@@ -14,6 +14,8 @@ scp file.txt remote_username@10.10.0.2:/remote/directory        # Copy file from
 ```
 ## misc
 ```bash
+tar -czvf name-of-archive.tar.gz /path/to/directory-or-file     # Compress an Entire Directory or a Single File
+tar -xzvf archive.tar.gz -C /tmp                                # Extract the contents of the archive to a specific directory
 echo "" > api-search_ID_debug.log                               # Write empty string into file. Usually used to empty a large log file
 sudo killall -HUP mDNSResponder                                 # Flush DNS
 cat /etc/*_version /etc/*-release && uname -a                   # Get information about Linux distribution
@@ -36,4 +38,11 @@ ls -F           # list directories with /
 ls -lR          # recursive listing of all subdirectories
 ls -t           # list most recently modified files and directories
 ls -lS          # list files and directories sorted by file size
+```
+
+## Function to remove comments & empty lines in a file
+```bash
+function clean_file {
+    sed -i '/^#/d;/$/d' $1
+}
 ```

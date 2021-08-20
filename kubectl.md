@@ -16,9 +16,9 @@ kubectl patch cronjob icarasia-cms-generate-bg-img-cronjob -p '{"spec" : {"suspe
 for pod in $(kubectl get pods -n monitoring | grep Evicted | awk '{print $1}'); do kubectl delete pod $pod -n monitoring; done  # Loop through all pods with status Evicted and delete
 kubectl patch deployment lapi-fresque -p '{"spec":{"template":{"metadata":{"labels":{"date":"1611115940"}}}}}'                  # Patch a deployment
 kubectl rollout restart deployment capi                                                                                         # Restart all pods in a deployment
-kubectl get pods --all-namespaces -o=json | jq -c '.items[] | {name: .metadata.name, namespace: .metadata.namespace, claimName: .spec |  select( has ("volumes") ).volumes[] | select( has ("persistentVolumeClaim") ).persistentVolumeClaim.claimName }'                                                                                               # Get all pods with a PVC attached
+kubectl get pods --all-namespaces -o=json | jq -c '.items[] | {name: .metadata.name, namespace: .metadata.namespace, claimName: .spec |  select( has ("volumes") ).volumes[] | select( has ("persistentVolumeClaim") ).persistentVolumeClaim.claimName }'                                                                                             # Get all pods with a PVC attached
 kubectl get po -o custom-columns="Name:metadata.name,CPU-limit:spec.containers[*].resources.limits.cpu"                         # Get cpu limits of all pods in default namespace
 kubectl get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].resources.limits.cpu}{"\n"}{end}'      # Get cpu limits of all pods in default namespace
-
-
+kubectl describe nodes | grep 'Name:\|  cpu\|  memory'                                                                          # Get current cpu and memory allocation from all nodes in cluter
+kubectl get events --sort-by=.metadata.creationTimestamp                                                                        # Get events sorted by time stamp
 ```
